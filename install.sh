@@ -96,7 +96,7 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     git -C ~/.vim submodule update --init --recursive
 
     # Copy vimrc file
-    if [ -f ~/.vimrc]; then
+    if [ -f ~/.vimrc ]; then
         rm ~/.vimrc
     fi
     ln -s ~/.vim/vimrc ~/.vimrc
