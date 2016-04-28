@@ -19,6 +19,13 @@ else
     NORMAL=""
 fi
 
+REPO_URL="https://github.com/staskjs/dotfiles.git"
+VIM_REPO_URL="https://github.com/staskjs/vimsettings.git"
+
+if [ ! -n "$DOTFILES_VIM"  ]; then
+    DOTFILES_VIM=1
+fi
+
 OMZ_INSTALLED=0
 # Check if oh-my-zsh is installed. If not, then install it.
 if [ ! -d ~/.oh-my-zsh ]; then
@@ -43,7 +50,7 @@ fi
 # Clone or update dotfiles directory
 if [ ! -d "$DOTFILES" ]; then
     echo "Installing dotfiles in $DOTFILES"
-    git clone -q https://github.com/staskjs/dotfiles.git $DOTFILES
+    git clone -q $REPO_URL $DOTFILES
 else
     CHANGED=$(git -C $DOTFILES diff-index --name-only HEAD --)
     if [ -n "$CHANGED" ]; then
@@ -62,12 +69,38 @@ fi
 # Copy functions file to zsh_custom directory
 cp $DOTFILES/functions.zsh $ZSH_CUSTOM/functions.zsh
 
+# ---------------------------------------------------
 # Copy .zshrc to home directory
 echo "Installing .zshrc"
 if [ -f ~/.zshrc ]; then
     rm ~/.zshrc
 fi
 ln -s $DOTFILES/zshrc ~/.zshrc
+# ---------------------------------------------------
+
+# Install or update vim
+if [ "$DOTFILES_VIM" -eq 1 ]; then
+    if [ -d ~/.vim ]; then
+        CHANGED=$(git -C ~/.vim diff-index --name-only HEAD --)
+        if [ -n "$CHANGED" ]; then
+            echo "${RED}~/.vim has changes. Commit (use \`vimpush\` command) or discard them and try again.${NORMAL}"
+            exit 1
+        else
+            echo "Updating vim"
+            git -C ~/.vim pull > /dev/null
+        fi
+    else
+        echo "Installing vim settings"
+        git clone -q $VIM_REPO_URL ~/.vim
+    fi
+    git -C ~/.vim submodule update --init --recursive
+
+    # Copy vimrc file
+    if [ -f ~/.vimrc]; then
+        rm ~/.vimrc
+    fi
+    ln -s ~/.vim/vimrc ~/.vimrc
+fi
 
 # Switch to zsh finally
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
