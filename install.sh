@@ -36,26 +36,35 @@ else
     git clone -q https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
 
+if [ ! -n "$DOTFILES"  ]; then
+    export DOTFILES="$HOME/.dotfiles"
+fi
+
 # Clone or update dotfiles directory
-export DOTFILES_DIR="$HOME/.dotfiles"
-if [ ! -d "$DOTFILES_DIR" ]; then
-    echo "Installing dotfiles in $DOTFILES_DIR"
-    git clone -q https://github.com/staskjs/dotfiles.git $DOTFILES_DIR
+if [ ! -d "$DOTFILES" ]; then
+    echo "Installing dotfiles in $DOTFILES"
+    git clone -q https://github.com/staskjs/dotfiles.git $DOTFILES
 else
-    CHANGED=$(git -C $DOTFILES_DIR diff-index --name-only HEAD --)
+    CHANGED=$(git -C $DOTFILES diff-index --name-only HEAD --)
     if [ -n "$CHANGED" ]; then
-        echo "${RED}$DOTFILES_DIR has changed. Commit or discard them and try again.${NORMAL}"
+        echo "${RED}$DOTFILES has changed. Commit or discard them and try again.${NORMAL}"
         exit 1
     else
         echo "Updating dotfiles"
-        git -C $DOTFILES_DIR pull > /dev/null
+        git -C $DOTFILES pull > /dev/null
     fi
 fi
 
+if [ ! -n "$ZSH_CUSTOM"  ]; then
+    ZSH_CUSTOM="$ZSH/custom"
+fi
+
+# Copy functions file to zsh_custom directory
+cp $DOTFILES/functions.zsh $ZSH_CUSTOM/functions.zsh
+
 # Copy .zshrc to home directory
 echo "Installing .zshrc"
-rm ~/.zshrc
-cp $DOTFILES_DIR/zshrc ~/.zshrc
+cp $DOTFILES/zshrc ~/.zshrc
 
 # Switch to zsh finally
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
