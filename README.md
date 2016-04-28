@@ -9,3 +9,8 @@ To update dotfiles use command:
 ```sh
 dotup
 ```
+
+To commit and push changes:
+```sh
+dotpush
+```

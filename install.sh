@@ -47,7 +47,7 @@ if [ ! -d "$DOTFILES" ]; then
 else
     CHANGED=$(git -C $DOTFILES diff-index --name-only HEAD --)
     if [ -n "$CHANGED" ]; then
-        echo "${RED}$DOTFILES has changes. Commit or discard them and try again.${NORMAL}"
+        echo "${RED}$DOTFILES has changes. Commit (use \`dotpush\` command) or discard them and try again.${NORMAL}"
         exit 1
     else
         echo "Updating dotfiles"

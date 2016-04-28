@@ -12,5 +12,8 @@ function dotpush() {
   else
       git -C $DOTFILES commit
   fi
+}
 
+function dotst() {
+  git -C $DOTFILES status
 }
