@@ -47,7 +47,7 @@ if [ ! -d "$DOTFILES" ]; then
 else
     CHANGED=$(git -C $DOTFILES diff-index --name-only HEAD --)
     if [ -n "$CHANGED" ]; then
-        echo "${RED}$DOTFILES has changed. Commit or discard them and try again.${NORMAL}"
+        echo "${RED}$DOTFILES has changes. Commit or discard them and try again.${NORMAL}"
         exit 1
     else
         echo "Updating dotfiles"
@@ -64,7 +64,10 @@ cp $DOTFILES/functions.zsh $ZSH_CUSTOM/functions.zsh
 
 # Copy .zshrc to home directory
 echo "Installing .zshrc"
-cp $DOTFILES/zshrc ~/.zshrc
+if [ -f ~/.zshrc ]; then
+    rm ~/.zshrc
+fi
+ln -s $DOTFILES/zshrc ~/.zshrc
 
 # Switch to zsh finally
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
