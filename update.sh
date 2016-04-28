@@ -1,1 +1,1 @@
-echo 'UPDATE'
+sh $DOTFILES/install.sh
