@@ -1,32 +1,34 @@
 if [ ! -d ~/.oh-my-zsh ]; then
-    echo "Install oh my zsh"
-    echo "To do this please go to https://github.com/robbyrussell/oh-my-zsh"
-    exit
+    echo "Installing oh my zsh"
+    git clone -q https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
 if [ -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then
     echo "Powerlevel9k is installed - updating"
-    git -C ~/.oh-my-zsh/custom/themes/powerlevel9k pull
+    git -C ~/.oh-my-zsh/custom/themes/powerlevel9k pull > /dev/null
 else
     echo "Powerlevel9k theme is not installed - installing"
-    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    git clone -q https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
 
-DOTFILES_DIR="$HOME/df"
+export DOTFILES_DIR="$HOME/.dotfiles"
 if [ ! -d "$DOTFILES_DIR" ]; then
-    echo "Installing dotfiles"
-    git clone https://github.com/staskjs/dotfiles.git $DOTFILES_DIR
+    echo "Installing dotfiles in $DOTFILES_DIR"
+    git clone -q https://github.com/staskjs/dotfiles.git $DOTFILES_DIR
 else
-    echo "Updating dotfiles"
-    git -C $DOTFILES_DIR pull
+    CHANGED=$(git -C $DOTFILES_DIR diff-index --name-only HEAD --)
+    if [ -n "$CHANGED" ]; then
+        echo "$DOTFILES_DIR has changed. Commit or discard them and try again."
+        exit 1
+    else
+        echo "Updating dotfiles"
+        git -C $DOTFILES_DIR pull > /dev/null
+    fi
 fi
 
 echo "Installing .zshrc"
 rm ~/.zshrc
 cp $DOTFILES_DIR/zshrc ~/.zshrc
-
-#echo "Removing dotfiles"
-#rm -rf DOTFILES_DIR
 
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
