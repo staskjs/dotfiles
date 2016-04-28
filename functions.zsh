@@ -1,5 +1,5 @@
 function dotup() {
-  env ZSH=$ZSH /bin/sh $DOTFILES/update.sh
+  env ZSH=$ZSH /bin/sh $DOTFILES/install.sh
 }
 
 function dotpush() {
