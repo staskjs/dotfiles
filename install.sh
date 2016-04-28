@@ -25,6 +25,9 @@ echo "Installing .zshrc"
 rm ~/.zshrc
 cp $DOTFILES_DIR/zshrc ~/.zshrc
 
+#echo "Removing dotfiles"
+#rm -rf DOTFILES_DIR
+
 TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     # If this platform provides a "chsh" command (not Cygwin), do it, man!
