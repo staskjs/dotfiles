@@ -1,6 +1,6 @@
 # Usage
 
-Run installation script
+Run installation script. It can also be used to update dotfiles.
 ```sh
 sh -c "$(wget https://raw.githubusercontent.com/staskjs/dotfiles/master/install.sh -O -)"
 ```
@@ -13,4 +13,19 @@ dotup
 To commit and push changes:
 ```sh
 dotpush
+```
+
+View dotfiles git status
+```sh
+dotst
+```
+
+To commit and push vim changes:
+```sh
+vimpush
+```
+
+View .vim git status
+```sh
+vimst
 ```
