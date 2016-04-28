@@ -77,6 +77,13 @@ if [ -f ~/.zshrc ]; then
 fi
 ln -s $DOTFILES/zshrc ~/.zshrc
 # ---------------------------------------------------
+# Copy .tmux.conf to home directory
+echo "Installing .tmux.conf"
+if [ -f ~/.tmux.conf ]; then
+    rm ~/.tmux.conf
+fi
+ln -s $DOTFILES/tmux.conf ~/.tmux.conf
+# ---------------------------------------------------
 
 # Install or update vim
 if [ "$DOTFILES_VIM" -eq 1 ]; then
@@ -122,7 +129,7 @@ if [ "$OMZ_INSTALLED" -eq 1 ]; then
 fi
 
 echo "${BLUE}Use ~/.zshrc.custom file (create if not exists) to keep all custom configuration for current machine there."
-echo "~/.zshrc should not contain any custom configuration, because it will be overriden on next update"
+echo "~/.zshrc should not contain any custom configuration, because it will be overriden on next update."
 
 echo "${NORMAL}"
 
