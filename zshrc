@@ -50,7 +50,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails laravel4 bundler npm sublime)
+plugins=(git rails laravel4 bundler npm)
 
 # User configuration
 
@@ -88,8 +88,24 @@ if [ -d $HOME/.rvm ]; then
   export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
   source $HOME/.rvm/scripts/rvm
 fi
+
 if [ -d $HOME/.composer ]; then
   export PATH="$PATH:$HOME/.composer/vendor/bin"
 fi
-export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+
+#export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+#export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+
+if type tmux > /dev/null; then
+  alias tmux="tmux -2"
+fi
+
+if type vim > /dev/null; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
+
+if [ -f ~/.zshrc.custom ]; then
+  source ~/.zshrc.custom
+fi

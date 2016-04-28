@@ -1,7 +1,6 @@
 if [ ! -d ~/.oh-my-zsh ]; then
     echo "Install oh my zsh"
-    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-    exit
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" > /dev/null
 fi
 
 echo "Oh my zsh - success"
@@ -14,4 +13,14 @@ else
 fi
 echo "Powerlevel9k - success"
 
+DOTFILES_DIR="$HOME/df"
+if [ ! -d "$DOTFILES_DIR" ]; then
+    git clone https://github.com/staskjs/dotfiles.git $DOTFILES_DIR
+else
+    git -C $DOTFILES_DIR pull
+fi
 
+rm ~/.zshrc
+cp $DOTFILES_DIR/zshrc ~/.zshrc
+
+zsh
