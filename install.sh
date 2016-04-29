@@ -84,6 +84,23 @@ if [ -f ~/.tmux.conf ]; then
 fi
 ln -s $DOTFILES/tmux.conf ~/.tmux.conf
 # ---------------------------------------------------
+# Copy git config files to home directory
+echo "Installing git config"
+if [ -f ~/.gitconfig ]; then
+    rm ~/.gitconfig
+fi
+ln -s $DOTFILES/gitconfig ~/.gitconfig
+
+if [ -f ~/.gitmessage ]; then
+    rm ~/.gitmessage
+fi
+ln -s $DOTFILES/gitmessage ~/.gitmessage
+
+if [ -f ~/.gitignore ]; then
+    rm ~/.gitignore
+fi
+ln -s $DOTFILES/gitignore ~/.gitignore
+# ---------------------------------------------------
 
 # Install or update vim
 if [ "$DOTFILES_VIM" -eq 1 ]; then
