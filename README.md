@@ -5,6 +5,8 @@ It is always a trouble to synchronize same zsh config and all other possible con
 
 So I created a set of command for myself to make this routine easier.
 
+Feel free to fork and configure for your personal needs.
+
 # Dotfiles
 
 Repository currently includes `.zshrc` and `.tmux.conf`.
