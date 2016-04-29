@@ -16,6 +16,8 @@ Same goes for tmux, use `~/.tmux.conf.custom` file to contain local config.
 Vim settings can be found in separate repository [here](https://github.com/staskjs/vimsettings).
 However, `.vim` is also managed by this setup.
 
+Some good ideas are taken from [https://github.com/thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles).
+
 # Usage
 
 Run installation script. It can also be used to update dotfiles.
