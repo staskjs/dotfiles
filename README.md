@@ -24,30 +24,30 @@ Some good ideas are taken from [https://github.com/thoughtbot/dotfiles](https://
 
 Run installation script. It can also be used to update dotfiles.
 ```sh
-sh -c "$(wget https://raw.githubusercontent.com/staskjs/dotfiles/master/install.sh -O -)"
+$ sh -c "$(wget https://raw.githubusercontent.com/staskjs/dotfiles/master/install.sh -O -)"
 ```
 
 To update dotfiles use command:
 ```sh
-dotup
+$ dotup
 ```
 
 To commit and push changes:
 ```sh
-dotpush
+$ dotpush
 ```
 
 View dotfiles git status
 ```sh
-dotst
+$ dotst
 ```
 
 To commit and push vim changes:
 ```sh
-vimpush
+$ vimpush
 ```
 
 View .vim git status
 ```sh
-vimst
+$ vimst
 ```
