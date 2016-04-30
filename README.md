@@ -20,12 +20,16 @@ However, `.vim` is also managed by this setup.
 
 Some good ideas are taken from [https://github.com/thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles).
 
-# Usage
+# Installation
 
 Run installation script. It can also be used to update dotfiles.
 ```sh
 $ sh -c "$(wget https://raw.githubusercontent.com/staskjs/dotfiles/master/install.sh -O -)"
 ```
+
+*NOTE*: you should have `zsh` and `git` to be installed.
+
+# Usage
 
 To update dotfiles use command:
 ```sh
@@ -36,6 +40,13 @@ To commit and push changes:
 ```sh
 $ dotpush
 ```
+
+I use [powerlevel9k oh-my-zsh theme](https://github.com/bhilburn/powerlevel9k) which requires powerline patched fonts to be installed and used.
+In case of missing or not being able to install them on particular device, next command can be used to toggle into simpler theme.
+```sh
+$ dots
+```
+`dots` stands for `dot simple`
 
 View dotfiles git status
 ```sh
