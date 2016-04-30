@@ -70,7 +70,7 @@ fi
 if [ -f $ZSH_CUSTOM/functions.zsh ]; then
     rm $ZSH_CUSTOM/functions.zsh
 fi
-ln -s $DOTFILES/functions.zsh $ZSH_CUSTOM/functioba.zsh
+ln -s $DOTFILES/functions.zsh $ZSH_CUSTOM/functions.zsh
 
 # ---------------------------------------------------
 # Copy .zshrc to home directory
