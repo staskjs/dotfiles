@@ -13,3 +13,4 @@ tmp/**/*
 *.pyc
 .vim
 .idea
+vendor
