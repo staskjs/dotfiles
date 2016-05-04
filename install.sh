@@ -104,6 +104,13 @@ if [ -f ~/.gitignore ]; then
 fi
 ln -s $DOTFILES/gitignore ~/.gitignore
 # ---------------------------------------------------
+# Copy .tmux.conf to home directory
+echo "Installing .irbrc"
+if [ -f ~/.irbrc ]; then
+    rm ~/.irbrc
+fi
+ln -s $DOTFILES/irbrc ~/.irbrc
+# ---------------------------------------------------
 
 # Install or update vim
 if [ "$DOTFILES_VIM" -eq 1 ]; then
