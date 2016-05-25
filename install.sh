@@ -111,6 +111,12 @@ if [ -f ~/.irbrc ]; then
 fi
 ln -s $DOTFILES/irbrc ~/.irbrc
 # ---------------------------------------------------
+echo "Installing w3m keymap"
+if [ -f ~/.w3m/keymap ]; then
+    rm ~/.w3m/keymap
+fi
+ln -s $DOTFILES/w3m-keymap ~/.w3m/keymap
+# ---------------------------------------------------
 
 # Install or update vim
 if [ "$DOTFILES_VIM" -eq 1 ]; then
