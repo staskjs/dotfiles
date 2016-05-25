@@ -99,6 +99,10 @@ if [ -d $HOME/.composer ]; then
   export PATH="$PATH:$HOME/.composer/vendor/bin"
 fi
 
+if [ -d $HOME/dasht ]; then
+  export PATH="$PATH:$HOME/dasht/bin"
+fi
+
 #export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 #export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
 
