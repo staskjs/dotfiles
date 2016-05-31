@@ -56,7 +56,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails laravel4 bundler npm)
+plugins=(git rails laravel4 bundler npm vi-mode)
 
 # User configuration
 
@@ -103,8 +103,8 @@ if [ -d $HOME/dasht ]; then
   export PATH="$PATH:$HOME/dasht/bin"
 fi
 
-#export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-#export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode)
 
 if type tmux > /dev/null; then
   alias tmux="tmux -2"
@@ -120,3 +120,7 @@ if [ -f ~/.zshrc.custom ]; then
   source ~/.zshrc.custom
 fi
 
+# Vi-mode config
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+export KEYTIMEOUT=1
