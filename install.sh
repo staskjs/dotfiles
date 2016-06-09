@@ -44,10 +44,10 @@ else
 fi
 
 echo "Installing my zsh theme"
-if [ -f ~/.oh-my-zsh/custom/themes/my-theme ]; then
+if [ -d ~/.oh-my-zsh/custom/themes/my-theme ]; then
     rm ~/.oh-my-zsh/custom/themes/my-theme
 fi
-ln -s $DOTFILES/my-theme ~/.oh-my-zsh/custom/themes/my-theme
+ln -s $DOTFILES/my-theme ~/.oh-my-zsh/custom/themes/
 
 if [ ! -n "$DOTFILES"  ]; then
     export DOTFILES="$HOME/.dotfiles"
