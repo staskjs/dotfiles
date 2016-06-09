@@ -43,6 +43,12 @@ else
     git clone -q https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 fi
 
+echo "Installing my zsh theme"
+if [ -f ~/.oh-my-zsh/custom/themes/my-theme ]; then
+    rm ~/.oh-my-zsh/custom/themes/my-theme
+fi
+ln -s $DOTFILES/my-theme ~/.oh-my-zsh/custom/themes/my-theme
+
 if [ ! -n "$DOTFILES"  ]; then
     export DOTFILES="$HOME/.dotfiles"
 fi

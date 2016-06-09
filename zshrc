@@ -9,7 +9,7 @@ export DOTFILES="$HOME/.dotfiles"
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 if [ "$DOTFILES_SIMPLE_THEME" -eq 1 ]; then
-  ZSH_THEME="cypher"
+  ZSH_THEME="my-theme/my-theme"
 else
   ZSH_THEME="powerlevel9k/powerlevel9k"
 fi
