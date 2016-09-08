@@ -134,12 +134,15 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
         else
             echo "Updating vim"
             git -C ~/.vim pull > /dev/null
+
+            if [ ! -f ~/.vim/bundle/Vundle.vim ]; then
+                git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+            fi
         fi
     else
         echo "Installing vim settings"
         git clone -q $VIM_REPO_URL ~/.vim
     fi
-    git -C ~/.vim submodule update --init --recursive
 
     # Copy vimrc file
     if [ -f ~/.vimrc ]; then

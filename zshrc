@@ -114,6 +114,10 @@ if type tmux > /dev/null; then
   alias tmux="tmux -2"
 fi
 
+if type tmuxinator > /dev/null; then
+  alias mux="tmuxinator"
+fi
+
 if type vim > /dev/null; then
   export EDITOR=vim
 else
@@ -128,3 +132,7 @@ fi
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 export KEYTIMEOUT=1
+PATH=/opt/local/bin:$PATH
+
+export NVM_DIR="/Users/staskjs/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
