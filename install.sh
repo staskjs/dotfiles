@@ -53,6 +53,13 @@ if [ -f ~/.bashrc ]; then
 fi
 ln -s $DOTFILES/bashrc ~/.bashrc
 # ---------------------------------------------------
+# Copy .inputrc to home directory
+echo "Installing .inputrc"
+if [ -f ~/.inputrc ]; then
+    rm ~/.inputrc
+fi
+ln -s $DOTFILES/inputrc ~/.inputrc
+# ---------------------------------------------------
 # Copy .tmux.conf to home directory
 echo "Installing .tmux.conf"
 if [ -f ~/.tmux.conf ]; then
