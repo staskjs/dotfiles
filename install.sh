@@ -35,14 +35,9 @@ if [ ! -d "$DOTFILES" ]; then
     echo "Installing dotfiles in $DOTFILES"
     git clone -q $REPO_URL $DOTFILES
 else
-    CHANGED=$(git -C $DOTFILES diff-index --name-only HEAD --)
-    if [ -n "$CHANGED" ]; then
-        echo "${RED}$DOTFILES has changes. Commit (use \`dotpush\` command) or discard them and try again.${NORMAL}"
-        exit 1
-    else
-        echo "Updating dotfiles"
-        git -C $DOTFILES pull > /dev/null
-    fi
+    rm -rf $DOTFILES
+    echo "Updating dotfiles in $DOTFILES"
+    git clone -q $REPO_URL $DOTFILES
 fi
 
 # ---------------------------------------------------
