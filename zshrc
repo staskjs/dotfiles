@@ -116,6 +116,7 @@ fi
 
 if type tmuxinator > /dev/null; then
   alias mux="tmuxinator"
+  alias t="tmuxinator start"
 fi
 
 if type vim > /dev/null; then
@@ -135,4 +136,4 @@ export KEYTIMEOUT=1
 PATH=/opt/local/bin:$PATH
 
 export NVM_DIR="/Users/staskjs/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm

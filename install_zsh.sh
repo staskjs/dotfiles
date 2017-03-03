@@ -26,6 +26,29 @@ if [ ! -n "$DOTFILES_VIM"  ]; then
     DOTFILES_VIM=1
 fi
 
+OMZ_INSTALLED=0
+# Check if oh-my-zsh is installed. If not, then install it.
+if [ ! -d ~/.oh-my-zsh ]; then
+    echo "Installing oh my zsh"
+    git clone -q https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    OMZ_INSTALLED=1
+fi
+
+# Install or update powerlevel9k zsh theme
+if [ -d ~/.oh-my-zsh/custom/themes/powerlevel9k ]; then
+    echo "Powerlevel9k is installed - updating"
+    git -C ~/.oh-my-zsh/custom/themes/powerlevel9k pull > /dev/null
+else
+    echo "Powerlevel9k theme is not installed - installing"
+    git clone -q https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+fi
+
+echo "Installing my zsh theme"
+if [ -d ~/.oh-my-zsh/custom/themes/my-theme ]; then
+    rm ~/.oh-my-zsh/custom/themes/my-theme
+fi
+ln -s $DOTFILES/my-theme ~/.oh-my-zsh/custom/themes/
+
 if [ ! -n "$DOTFILES"  ]; then
     export DOTFILES="$HOME/.dotfiles"
 fi
@@ -45,13 +68,23 @@ else
     fi
 fi
 
-# ---------------------------------------------------
-# Copy .bashrc to home directory
-echo "Installing .bashrc"
-if [ -f ~/.bashrc ]; then
-    rm ~/.bashrc
+if [ ! -n "$ZSH_CUSTOM"  ]; then
+    ZSH_CUSTOM="$ZSH/custom"
 fi
-ln -s $DOTFILES/bashrc ~/.bashrc
+
+# Copy functions file to zsh_custom directory
+if [ -f $ZSH_CUSTOM/functions.zsh ]; then
+    rm $ZSH_CUSTOM/functions.zsh
+fi
+ln -s $DOTFILES/functions.zsh $ZSH_CUSTOM/functions.zsh
+
+# ---------------------------------------------------
+# Copy .zshrc to home directory
+echo "Installing .zshrc"
+if [ -f ~/.zshrc ]; then
+    rm ~/.zshrc
+fi
+ln -s $DOTFILES/zshrc ~/.zshrc
 # ---------------------------------------------------
 # Copy .tmux.conf to home directory
 echo "Installing .tmux.conf"
@@ -118,9 +151,28 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     ln -s ~/.vim/vimrc ~/.vimrc
 fi
 
+# Switch to zsh finally
+TEST_CURRENT_SHELL=$(expr "$SHELL" : '.*/\(.*\)')
+if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
+    # If this platform provides a "chsh" command (not Cygwin), do it, man!
+    if hash chsh >/dev/null 2>&1; then
+      chsh -s $(grep /zsh$ /etc/shells | tail -1)
+    # Else, suggest the user do so manually.
+    else
+      printf "I can't change your shell automatically because this system does not have chsh.\n"
+      printf "Please manually change your default shell to zsh!\n"
+    fi
+fi
+
 echo "${GREEN}"
 echo "Everything is installed successfully!"
-echo "${BLUE}Use ~/.bashrc.local file (create if not exists) to keep all custom configuration for current machine there."
-echo "~/.bashrc should not contain any custom configuration, because it will be overriden on next update."
+if [ "$OMZ_INSTALLED" -eq 1 ]; then
+    echo "Feel free to explore oh-my-zsh on https://github.com/robbyrussell/oh-my-zsh"
+fi
+
+echo "${BLUE}Use ~/.zshrc.custom file (create if not exists) to keep all custom configuration for current machine there."
+echo "~/.zshrc should not contain any custom configuration, because it will be overriden on next update."
 
 echo "${NORMAL}"
+
+env zsh
