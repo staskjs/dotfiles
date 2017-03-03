@@ -5,18 +5,20 @@ find_git_branch() {
     if [[ "$branch" == "HEAD" ]]; then
       branch='detached*'
     fi
-    git_branch="($branch)"
+    git_branch="($branch) "
   else
     git_branch=""
   fi
 }
 
 find_git_dirty() {
-  local status=$(git status --porcelain 2> /dev/null)
+  local status=$(git status --porcelain --untracked-files=no 2> /dev/null)
   if [[ "$status" != "" ]]; then
     git_dirty='*'
+    gitcolor="$txtylw"
   else
     git_dirty=''
+    gitcolor="$txtgrn"
   fi
 }
 

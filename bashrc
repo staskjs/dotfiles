@@ -4,7 +4,7 @@ export DOTFILES="$HOME/.dotfiles"
 export GITAWAREPROMPT=$DOTFILES/git-aware-prompt
 source "${GITAWAREPROMPT}/main.sh"
 
-export PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$txtylw\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\\$ \[$(tput sgr0)\]"
+export PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \$gitcolor\$git_branch\[$txtrst\]\\$ \[$(tput sgr0)\]"
 
 # ----------------------------------------------
 
