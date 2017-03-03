@@ -1,12 +1,49 @@
 export DOTFILES="$HOME/.dotfiles"
 
+# ----------------------- PROMPT ----------------------
+
+# Regular colors
+txtblk="$(tput setaf 0 2>/dev/null || echo '\e[0;30m')"  # Black
+txtred="$(tput setaf 1 2>/dev/null || echo '\e[0;31m')"  # Red
+txtgrn="$(tput setaf 2 2>/dev/null || echo '\e[0;32m')"  # Green
+txtylw="$(tput setaf 3 2>/dev/null || echo '\e[0;33m')"  # Yellow
+txtblu="$(tput setaf 4 2>/dev/null || echo '\e[0;34m')"  # Blue
+txtpur="$(tput setaf 5 2>/dev/null || echo '\e[0;35m')"  # Purple
+txtcyn="$(tput setaf 6 2>/dev/null || echo '\e[0;36m')"  # Cyan
+txtwht="$(tput setaf 7 2>/dev/null || echo '\e[0;37m')"  # White
+
+# Reset color
+txtrst="$(tput sgr 0 2>/dev/null || echo '\e[0m')"  # Text Reset
+
 # Load Git functions
-export GITAWAREPROMPT=$DOTFILES/git-aware-prompt
-source "${GITAWAREPROMPT}/main.sh"
+find_git_branch() {
+  # Based on: http://stackoverflow.com/a/13003854/170413
+  local branch
+  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+    if [[ "$branch" == "HEAD" ]]; then
+      branch='detached*'
+    fi
+    git_branch="($branch) "
+  else
+    git_branch=""
+  fi
+}
+
+find_git_dirty() {
+  local status=$(git status --porcelain --untracked-files=no 2> /dev/null)
+  if [[ "$status" != "" ]]; then
+    gitcolor="$txtylw"
+  else
+    gitcolor="$txtgrn"
+  fi
+}
+
+find_git_branch
+find_git_dirty
 
 export PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \$gitcolor\$git_branch\[$txtrst\]\\$ \[$(tput sgr0)\]"
 
-# ----------------------------------------------
+# ----------------------- END PROMPT ----------------------
 
 export TERM="xterm-256color"
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
@@ -36,6 +73,8 @@ else
 fi
 
 PATH=/opt/local/bin:$PATH
+
+# ----------------------- ALIASES ----------------------
 
 # Git aliases
 alias ga='git add'
@@ -68,5 +107,11 @@ alias rr='rake routes'
 # Laravel aliases
 alias la4='php artisan'
 alias la5='php artisan'
+alias la4m='php artisan migrate:make'
+alias la5m='php artisan make:migration'
 
-source ~/.bashrc.local
+# ----------------------- END ALIASES ----------------------
+
+if [ -d ~/.bashrc.local ]; then
+  source ~/.bashrc.local
+fi
