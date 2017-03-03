@@ -24,14 +24,10 @@ if [ -d $HOME/dasht ]; then
   export PATH="$PATH:$HOME/dasht/bin"
 fi
 
-if type tmux > /dev/null; then
-  alias tmux="tmux -2"
-fi
+alias tmux="tmux -2"
 
-if type tmuxinator > /dev/null; then
-  alias mux="tmuxinator"
-  alias t="tmuxinator start"
-fi
+alias mux="tmuxinator"
+alias t="tmuxinator start"
 
 if type vim > /dev/null; then
   export EDITOR=vim
