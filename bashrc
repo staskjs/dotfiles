@@ -38,8 +38,7 @@ find_git_dirty() {
   fi
 }
 
-find_git_branch
-find_git_dirty
+PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
 export PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \$gitcolor\$git_branch\[$txtrst\]\\$ \[$(tput sgr0)\]"
 
@@ -93,6 +92,7 @@ alias glgp='git log --stat -p'
 alias gm='git merge'
 alias gp='git push'
 alias gst='git status'
+alias grb='git rebase'
 
 # Rails aliases
 alias rc='rails console'
@@ -112,6 +112,6 @@ alias la5m='php artisan make:migration'
 
 # ----------------------- END ALIASES ----------------------
 
-if [ -d ~/.bashrc.local ]; then
+if [ ! -d ~/.bashrc.local ]; then
   source ~/.bashrc.local
 fi
