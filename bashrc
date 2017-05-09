@@ -23,7 +23,17 @@ find_git_branch() {
     if [[ "$branch" == "HEAD" ]]; then
       branch='detached*'
     fi
-    git_branch="($branch) "
+    if [[ "$branch" != "detached*" ]]; then
+      commits=$(git rev-list --count origin/$branch..HEAD)
+      if [[ "$commits" != "0" ]]; then
+        commits=" >$commits"
+      else
+        commits=""
+      fi
+      git_branch="($branch$commits) "
+    else
+      git_branch="($branch)"
+    fi
   else
     git_branch=""
   fi
@@ -111,6 +121,14 @@ alias la4m='php artisan migrate:make'
 alias la5m='php artisan make:migration'
 
 # ----------------------- END ALIASES ----------------------
+
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 if [ ! -d ~/.bashrc.local ]; then
   source ~/.bashrc.local
