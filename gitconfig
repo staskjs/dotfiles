@@ -16,5 +16,5 @@
 [include]
   path = ~/.gitconfig.local
 [user]
-	email = gilbert_90@mail.ru
+	email = staskjs@mail.ru
 	name = Stas Karpov
