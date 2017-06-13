@@ -24,7 +24,8 @@ find_git_branch() {
       branch='detached*'
     fi
     if [[ "$branch" != "detached*" ]]; then
-      if git branch -a | egrep remotes/origin/$branch; then
+      hasbranch=$(git branch -a | egrep remotes/origin/$branch)
+      if [[ "$hasbranch" != "" ]]; then
         commits=$(git rev-list --count origin/$branch..HEAD)
         if [[ "$branchexists" != "0" && "$commits" != "0" ]]; then
           commits=" >$commits"
