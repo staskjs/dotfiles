@@ -24,9 +24,13 @@ find_git_branch() {
       branch='detached*'
     fi
     if [[ "$branch" != "detached*" ]]; then
-      commits=$(git rev-list --count origin/$branch..HEAD)
-      if [[ "$commits" != "0" ]]; then
-        commits=" >$commits"
+      if git branch -a | egrep remotes/origin/$branch; then
+        commits=$(git rev-list --count origin/$branch..HEAD)
+        if [[ "$branchexists" != "0" && "$commits" != "0" ]]; then
+          commits=" >$commits"
+        else
+          commits=""
+        fi
       else
         commits=""
       fi
@@ -103,6 +107,7 @@ alias gm='git merge'
 alias gp='git push'
 alias gst='git status'
 alias grb='git rebase'
+alias grbc='git rebase --continue'
 
 # Rails aliases
 alias rc='rails console'
