@@ -8,9 +8,9 @@ log/*.log
 rerun.txt
 tags
 !tags/
-tmp/**/*
+./tmp/**/*
 !tmp/cache/.keep
 *.pyc
 .vim
 .idea
-vendor
+./vendor
