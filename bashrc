@@ -55,7 +55,7 @@ find_git_dirty() {
 
 PROMPT_COMMAND="find_git_branch; find_git_dirty; $PROMPT_COMMAND"
 
-export PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$gitcolor\]\$git_branch\[$txtrst\]\\$ \[$(tput sgr0)\]"
+PS1="\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;10m\]::\[$(tput sgr0)\]\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[\$gitcolor\]\$git_branch\[$txtrst\]\\$ \[$(tput sgr0)\]"
 
 # ----------------------- END PROMPT ----------------------
 
@@ -125,6 +125,11 @@ alias la4='php artisan'
 alias la5='php artisan'
 alias la4m='php artisan migrate:make'
 alias la5m='php artisan make:migration'
+
+# Yarn aliases
+alias ya='yarn'
+alias yaa='yarn add'
+alias yau='yarn upgrade'
 
 # ----------------------- END ALIASES ----------------------
 
