@@ -41,6 +41,13 @@ else
 fi
 
 # ---------------------------------------------------
+# Copy .bash_profile to home directory
+echo "Installing .bash_profile"
+if [ -f ~/.bash_profile ]; then
+    rm ~/.bash_profile
+fi
+ln -s $DOTFILES/bash_profile ~/.bash_profile
+# ---------------------------------------------------
 # Copy .bashrc to home directory
 echo "Installing .bashrc"
 if [ -f ~/.bashrc ]; then
