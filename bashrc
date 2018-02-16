@@ -109,6 +109,7 @@ alias gp='git push'
 alias gst='git status'
 alias grb='git rebase'
 alias grbc='git rebase --continue'
+alias gt='git tag'
 
 # Rails aliases
 alias rc='rails console'
