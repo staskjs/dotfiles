@@ -93,11 +93,11 @@ if [ -f ~/.irbrc ]; then
 fi
 ln -s $DOTFILES/irbrc ~/.irbrc
 # ---------------------------------------------------
-echo "Installing w3m keymap"
-if [ -f ~/.w3m/keymap ]; then
-    rm ~/.w3m/keymap
-fi
-ln -s $DOTFILES/w3m-keymap ~/.w3m/keymap
+#echo "Installing w3m keymap"
+#if [ -f ~/.w3m/keymap ]; then
+#    rm ~/.w3m/keymap
+#fi
+#ln -s $DOTFILES/w3m-keymap ~/.w3m/keymap
 # ---------------------------------------------------
 
 # Install or update vim
@@ -126,6 +126,10 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     fi
     ln -s ~/.vim/vimrc ~/.vimrc
 fi
+
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 echo "${GREEN}"
 echo "Everything is installed successfully!"
