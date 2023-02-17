@@ -127,6 +127,10 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     ln -s ~/.vim/vimrc ~/.vimrc
 fi
 
+echo "Installing nvim config"
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+ls -s ~/.dotfiles/nvim ~/.config/nvim
+
 # Install fzf
 rm -rf ~/.fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
