@@ -127,6 +127,10 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     ln -s ~/.vim/vimrc ~/.vimrc
 fi
 
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/bin/nvim
+
 echo "Installing nvim config"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 mkdir -p ~/.config
