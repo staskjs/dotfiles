@@ -129,7 +129,8 @@ fi
 
 echo "Installing nvim config"
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-ls -s ~/.dotfiles/nvim ~/.config/nvim
+mkdir -p ~/.config
+ln -s ~/.dotfiles/nvim ~/.config/nvim
 
 # Install fzf
 rm -rf ~/.fzf
