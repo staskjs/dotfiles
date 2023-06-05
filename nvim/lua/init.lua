@@ -1,19 +1,12 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({
-    'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path
-  })
-  vim.api.nvim_command 'packadd packer.nvim'
-end
-
 require("packer").startup(function(use)
   use 'wbthomason/packer.nvim'
   -- use { 'codota/tabnine-nvim', run = "./dl_binaries.sh" }
   use { 'natecraddock/sessions.nvim' }
   -- use { 'github/copilot.vim' }
   use { 'gpanders/editorconfig.nvim' }
-end).sync()
+
+  use { 'Exafunction/codeium.vim' }
+end)
 
 -- require('tabnine').setup({
   -- disable_auto_comment=true, 
@@ -50,3 +43,4 @@ end
 -- End sessions
 
 -- vim.keymap.set('i', 'C-j', 'copilot#Accept("<CR>")', { silent = true })
+vim.keymap.set('n', '<Leader>rc', ':terminal cargo run<CR>', { noremap = true })
