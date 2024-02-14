@@ -141,6 +141,9 @@ rm -rf ~/.fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+# Install zoxide (cd tool)
+curl -sS https://webinstall.dev/zoxide | bash
+
 source ~/.bashrc
 
 echo "${GREEN}"
