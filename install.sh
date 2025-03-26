@@ -127,7 +127,7 @@ if [ "$DOTFILES_VIM" -eq 1 ]; then
     ln -s ~/.vim/vimrc ~/.vimrc
 fi
 
-curl -LO https://github.com/neovim/neovim-releases/releases/download/nightly/nvim-linux-x86_64.appimage
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
 chmod u+x nvim-linux-x86_64.appimage
 sudo mv nvim-linux-x86_64.appimage /usr/bin/nvim
 
